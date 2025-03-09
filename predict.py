@@ -67,10 +67,18 @@ SCHEDULERS = {
 
 def download_weights(url, dest):
     start = time.time()
-    print("downloading url: ", url)
-    print("downloading to: ", dest)
+    print("downloading url:", url)
+    print("downloading to:", dest)
     subprocess.check_call(["wget", "-P", dest, url], close_fds=False)
-    print("downloading took: ", time.time() - start)
+    print("downloading took:", time.time() - start)
+    
+    # Extract if it's a .tar file
+    filename = os.path.join(dest, os.path.basename(url))
+    if filename.endswith(".tar"):
+        print("Extracting:", filename)
+        with tarfile.open(filename, "r") as tar:
+            tar.extractall(path=dest)
+        print("Extraction completed.")
 
 
 class Predictor(BasePredictor):
