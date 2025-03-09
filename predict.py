@@ -4,6 +4,7 @@ import os
 import shutil
 import subprocess
 import time
+import tarfile
 from typing import Any, Callable, Dict, List, Optional, Tuple, Union
 from weights import WeightsDownloadCache
 
